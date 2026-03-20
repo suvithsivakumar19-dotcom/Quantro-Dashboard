@@ -1,9 +1,21 @@
 # Welcome to Quantro Dashboard
 
-This project is now configured as a fullstack app (frontend + backend + SQLite DB).
+## 🎥 Demo Video
 
-- Frontend: http://localhost:8080
-- Backend API: http://localhost:4000/api
+**Watch the Quantro Dashboard in action:**
+
+[![Watch the video](https://img.shields.io/badge/Watch%20Demo-Video-blue?style=for-the-badge)](media/Quantro%20Dashboard%20Video.mp4)
+
+[Download Demo Video](media/Quantro%20Dashboard%20Video.mp4) or view it directly in the `/media` folder.
+
+---
+
+## 📱 About
+
+This project is now configured as a fullstack app (frontend + backend + JSON DB).
+
+- **Frontend:** http://localhost:8080
+- **Backend API:** http://localhost:4000/api
 
 ## Setup
 
