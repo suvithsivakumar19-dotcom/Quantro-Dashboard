@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 25% 97%;
+    --foreground: 222 47% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 8%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 20%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 83% 53%;
+
+    --radius: 0.75rem;
+
+    --rose: 346 84% 61%;
+    --emerald: 160 84% 39%;
+    --amber: 38 92% 50%;
+    --violet: 262 83% 58%;
+    --cyan: 192 91% 36%;
+    --indigo: 239 84% 67%;
+
+    --glass-bg: 0 0% 100%;
+    --glass-border: 220 13% 91%;
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 220 14% 80%;
+    --sidebar-primary: 221 83% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 14%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 222 47% 14%;
+    --sidebar-ring: 221 83% 53%;
+  }
+
+  .dark {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 221 83% 53%;
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 85%;
+    --sidebar-primary: 221 83% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 12%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 217 33% 12%;
+    --sidebar-ring: 221 83% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-2xl border border-border/50 rounded-2xl;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.05) inset,
+      0 10px 40px -10px rgba(0, 0, 0, 0.06),
+      0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  }
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 ease-out;
+  }
+  .glass-card-hover:hover {
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1) inset,
+      0 20px 60px -15px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.2);
+  }
+
+  .gradient-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .gradient-blob-1 {
+    @apply gradient-blob;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, hsl(221 83% 53% / 0.5), transparent 70%);
+    top: -250px;
+    right: -150px;
+    animation: blob-float 20s ease-in-out infinite;
+  }
+  .gradient-blob-2 {
+    @apply gradient-blob;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, hsl(160 84% 39% / 0.4), transparent 70%);
+    bottom: -200px;
+    left: -150px;
+    animation: blob-float 25s ease-in-out infinite reverse;
+  }
+  .gradient-blob-3 {
+    @apply gradient-blob;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, hsl(262 83% 58% / 0.3), transparent 70%);
+    top: 35%;
+    left: 25%;
+    animation: blob-float 30s ease-in-out infinite 5s;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--violet)), hsl(var(--primary)));
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.3);
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--muted-foreground) / 0.05) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -30px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 15px) scale(1.02); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px -5px hsl(var(--primary) / 0.2); }
+  50% { box-shadow: 0 0 40px -5px hsl(var(--primary) / 0.4); }
+}
+
+/* React Grid Layout styles */
+.react-grid-layout {
+  position: relative;
+  transition: height 300ms ease;
+}
+.react-grid-item {
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.react-grid-item.cssTransforms {
+  transition-property: transform;
+}
+.react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+.react-grid-item:hover > .react-resizable-handle {
+  opacity: 0.6;
+}
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid hsl(var(--primary) / 0.5);
+  border-bottom: 2px solid hsl(var(--primary) / 0.5);
+  border-radius: 0 0 3px 0;
+}
+.react-grid-placeholder {
+  background: hsl(var(--primary) / 0.08) !important;
+  border: 2px dashed hsl(var(--primary) / 0.25) !important;
+  border-radius: 1rem !important;
+  opacity: 1 !important;
+}
+.react-grid-item.react-draggable-dragging {
+  opacity: 0.8;
+  z-index: 100;
+  transform: scale(1.02);
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+}
