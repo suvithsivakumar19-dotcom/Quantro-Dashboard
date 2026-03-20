@@ -1,4 +1,11 @@
 {
-  "widgets": [],
-  "nextId": 1
+  "widgets": [
+    {
+      "id": 1,
+      "title": "Test Widget",
+      "value": 100,
+      "createdAt": "2026-03-20T17:31:11.727Z"
+    }
+  ],
+  "nextId": 2
 }

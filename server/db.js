@@ -1,51 +1,29 @@
-import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const filePath = path.join(__dirname, 'quantro-db.json');
+const widgetSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  value: { type: Number, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
 
-async function readDB() {
+const Widget = mongoose.model('Widget', widgetSchema);
+
+export async function initDB() {
   try {
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
+    await mongoose.connect('mongodb://localhost:27017/quantro-dashboard');
+    console.log('Connected to MongoDB');
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      return { widgets: [], nextId: 1 };
-    }
+    console.error('MongoDB connection error:', error);
     throw error;
   }
 }
 
-async function writeDB(db) {
-  await fs.writeFile(filePath, JSON.stringify(db, null, 2), 'utf8');
-}
-
-export async function initDB() {
-  const db = await readDB();
-  db.widgets = db.widgets || [];
-  db.nextId = db.nextId || 1;
-  await writeDB(db);
-}
-
 export async function getWidgets() {
-  const db = await readDB();
-  return (db.widgets || []).slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  return await Widget.find().sort({ createdAt: -1 });
 }
 
 export async function addWidget({ title, value }) {
-  const db = await readDB();
-  const nextId = db.nextId || 1;
-  const widget = {
-    id: nextId,
-    title,
-    value: Number(value),
-    createdAt: new Date().toISOString(),
-  };
-  db.widgets = db.widgets || [];
-  db.widgets.push(widget);
-  db.nextId = nextId + 1;
-  await writeDB(db);
-  return widget;
+  const widget = new Widget({ title, value });
+  return await widget.save();
 }
+
