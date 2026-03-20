@@ -12,15 +12,27 @@
 
 ## 📱 About
 
-This project is now configured as a fullstack app (frontend + backend + JSON DB).
+This project is now configured as a fullstack app (frontend + backend + MongoDB).
 
 - **Frontend:** http://localhost:8080
 - **Backend API:** http://localhost:4000/api
+- **Database:** MongoDB (localhost:27017/quantro-dashboard)
 
 ## Setup
 
-1. npm install
-2. npm run dev
+1. **Install MongoDB** (if not already installed):
+   - Download from https://www.mongodb.com/try/download/community
+   - Start MongoDB service: `mongod` (or install as service)
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run the app:**
+   ```bash
+   npm run dev
+   ```
 
 ## Available scripts
 
